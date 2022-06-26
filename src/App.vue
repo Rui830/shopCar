@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <MyHeader title="购物车案例" background="gold" color="black"/>
+    <MyHeader title="购物车案例" background="gold" color="black" />
     <MyGoods />
     <MyFooter />
   </div>
@@ -10,12 +10,27 @@
 import MyHeader from '@/components/MyHeader.vue'
 import MyGoods from '@/components/MyGoods.vue'
 import MyFooter from '@/components/MyFooter.vue'
-
+import axios from 'axios'
 export default {
   components: {
     MyHeader,
     MyGoods,
     MyFooter
+  },
+  data() {
+    return {
+      goodsList: []
+    }
+  },
+  created() {
+    this.getGoods()
+  },
+  methods: {
+    async getGoods() {
+      const res = await axios({ url: '/api/cart' })
+      console.log(res)
+      this.goodsList = res.data.list
+    }
   }
 }
 </script>
