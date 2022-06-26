@@ -2,20 +2,17 @@
   <div class="my-goods-item">
     <div class="left">
       <div class="custom-control custom-checkbox">
-        <input type="checkbox" class="custom-control-input" id="input" />
-        <label class="custom-control-label" for="input">
-          <img
-            src="http://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-            alt=""
-          />
+        <input type="checkbox" class="custom-control-input" :id="goods.goods_id" />
+        <label class="custom-control-label" :for="goods.goods_id">
+          <img :src="goods.goods_img" alt="" />
         </label>
       </div>
     </div>
     <div class="right">
-      <div class="top">商品名字</div>
+      <div class="top">{{goods.goods_name}}</div>
       <div class="bottom">
-        <span class="price">¥ 100</span>
-        <span><MyCount/>  </span>
+        <span class="price">¥ {{goods.goods_price}}</span>
+        <span><MyCount :goods="goods"/> </span>
       </div>
     </div>
   </div>
@@ -27,8 +24,13 @@ import MyCount from './MyCount'
 export default {
   components: {
     MyCount
+  },
+  props: {
+    goods: {
+      type: Object,
+      required: true
+    }
   }
-
 }
 </script>
 
