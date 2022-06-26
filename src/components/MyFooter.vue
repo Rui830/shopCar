@@ -14,10 +14,12 @@
     <!-- 合计 -->
     <div>
       <span>合计:</span>
-      <span class="price">¥ 0</span>
+      <span class="price">¥ {{ total }}</span>
     </div>
     <!-- 按钮 -->
-    <button type="button" class="footer-btn btn btn-primary">结算 ( 0 )</button>
+    <button type="button" class="footer-btn btn btn-primary">
+      结算 ( {{ allCount }} )
+    </button>
   </div>
 </template>
 
@@ -37,6 +39,20 @@ export default {
       set(val) {
         this.goodsList.forEach((item) => (item.goods_state = val))
       }
+    },
+    allCount() {
+      return this.goodsList.reduce((pre, curr) => {
+        return curr.goods_state === true ? pre + curr.goods_count : pre
+      }, 0)
+    },
+    total() {
+      return this.goodsList.reduce((pre, curr) => {
+        if (curr.goods_state) {
+          return pre + curr.goods_count * curr.goods_price
+        } else {
+          return pre
+        }
+      }, 0)
     }
   }
 }
