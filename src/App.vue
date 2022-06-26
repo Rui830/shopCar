@@ -2,7 +2,7 @@
   <div class="app">
     <MyHeader title="购物车案例" background="gold" color="black" />
     <MyGoods v-for="item in goodsList" :key="item.goods_id" :goods="item" />
-    <MyFooter />
+    <MyFooter :goodsList="goodsList"/>
   </div>
 </template>
 

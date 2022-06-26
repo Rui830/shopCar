@@ -3,7 +3,12 @@
   <div class="my-footer">
     <!-- 全选 -->
     <div class="custom-control custom-checkbox">
-      <input type="checkbox" class="custom-control-input" id="footerCheck">
+      <input
+        type="checkbox"
+        class="custom-control-input"
+        id="footerCheck"
+        v-model="isAll"
+      />
       <label class="custom-control-label" for="footerCheck">全选</label>
     </div>
     <!-- 合计 -->
@@ -18,7 +23,22 @@
 
 <script>
 export default {
-
+  props: {
+    goodsList: {
+      type: Array,
+      required: true
+    }
+  },
+  computed: {
+    isAll: {
+      get() {
+        return this.goodsList.every((item) => item.goods_state)
+      },
+      set(val) {
+        this.goodsList.forEach((item) => (item.goods_state = val))
+      }
+    }
+  }
 }
 </script>
 
